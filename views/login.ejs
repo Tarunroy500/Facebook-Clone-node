@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../stylesheets/login.css" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="otp">
+      <div class="container">
+        <header>
+          <i class="bx bxs-check-shield"></i>
+        </header>
+        <h4>Enter OTP Code</h4>
+        <form id="otp-form">
+          <div class="input-field">
+            <input name="otp" type="number" />
+          </div>
+          <button type="submit">Verify OTP</button>
+        </form>
+      </div>
+    </div>
+    <header id="header">
+      <div class="layer"></div>
+
+      <div class="main">
+        <div class="left">
+          <img src="../images/img/fb logo.svg" alt="" />
+          <p>Connect with friends and the world around you on Facebook.</p>
+        </div>
+        <div class="right">
+          <form action="/login" method="post">
+            <div class="form_body">
+              <input
+                type="text"
+                name="email"
+                placeholder="Email or Phone Number"
+              />
+              <input type="password" name="password" placeholder="Password" />
+              <button class="login" type="submit">Log In</button>
+              <a href="/identify" class="forget">
+
+                <p class="forget">forget password?</p>
+              </a>
+              <hr />
+              <button class="create" type="button" onclick="show()">
+                Create new account
+              </button>
+            </div>
+          </form>
+          <p class="foot">
+            <span>Create a Page</span> for a celebrity, brand or business.
+          </p>
+        </div>
+      </div>
+
+      <div class="signup" id="signup">
+        <div class="top">
+          <div>
+            <h2>Sign Up</h2>
+            <p>it's quick and easy</p>
+          </div>
+          <img src="../images//img/cross.png" alt="" onclick="hide()" />
+        </div>
+        <hr />
+        <form class="signup_form">
+          <div class="signup_body">
+            <div class="name">
+              <input
+                required
+                type="text"
+                name="firstname"
+                placeholder="First Name"
+                class="same"
+              />
+              <input
+                required
+                type="text"
+                name="lastname"
+                placeholder="Last Name"
+                class="same"
+              />
+            </div>
+            <div class="bottom">
+              <input required type="text" name="email" placeholder="Email" />
+              <input
+                required
+                type="text"
+                name="phone"
+                placeholder="Phone Number"
+                type="number"
+                min="10"
+              />
+              <input
+                required
+                type="password"
+                name="password"
+                placeholder="New Password"
+              />
+            </div>
+          </div>
+
+          <div class="birthday">
+            <p class="text">Birthday</p>
+            <div class="date">
+              <select id="month" name="month">
+                <option value="1">Jan</option>
+                <option value="2">Feb</option>
+                <option value="3">Mar</option>
+                <option value="4">Apr</option>
+                <option value="5">May</option>
+                <option value="6">Jun</option>
+                <option value="7">Jul</option>
+                <option value="8">Aug</option>
+                <option value="9">Sep</option>
+                <option value="10">Oct</option>
+                <option value="11">Nov</option>
+                <option value="12">Dec</option>
+              </select>
+              <select id="day" name="day">
+                <% new Array(31).fill(0).map((_, i) => { %>
+                <option value="<%= i + 1 %>"><%= i + 1 %></option>
+                <% }) %>
+              </select>
+              <select name="year" id="">
+                <% new Array(35).fill(0).map((_, i) => { %>
+                <option value="<%= 2023 - i %>"><%= 2023 - i %></option>
+                <% }) %>
+              </select>
+            </div>
+          </div>
+          <div class="gender">
+            <p class="text">Gender</p>
+            <div class="person">
+              <div>
+                <label for="Femal">Female</label>
+                <input
+                  type="radio"
+                  name="gender"
+                  id="Female"
+                  name="fav_language"
+                  value="Female"
+                />
+              </div>
+              <div>
+                <label for="Male">Male</label>
+                <input
+                  type="radio"
+                  name="gender"
+                  id="Male"
+                  name="fav_language"
+                  value="Male"
+                />
+              </div>
+              <div>
+                <label for="Custom">Others</label>
+                <input
+                  type="radio"
+                  name="gender"
+                  id="Custom"
+                  name="fav_language"
+                  value="Others"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="content">
+            <p>
+              People who use our service may have uploaded your contact
+              information to Facebook. <span class="blue">Learn more.</span>
+            </p>
+            <p>
+              By clicking Sign Up, you agree to our Terms,
+              <span class="blue">Privacy Policy and Cookies Policy</span>. You
+              may receive SMS Notifications from us and can opt out any time.
+            </p>
+          </div>
+          <button class="singin">Sign Up</button>
+        </form>
+      </div>
+    </header>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.6/axios.min.js"
+      integrity="sha512-06NZg89vaTNvnFgFTqi/dJKFadQ6FIglD6Yg1HHWAUtVFFoXli9BZL4q4EO1UTKpOfCfW5ws2Z6gw49Swsilsg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="../javascripts/login.js"></script>
+  </body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | Facebook</title>
+    <link rel="stylesheet" href="../stylesheets/settings.css">
+    <!-- <link rel="stylesheet" href="../stylesheets/style.css"> -->
+  </head>
+  <body>
+    <!-- Sidebar navigation menu -->
+<div class="sidebar-nav">
+  <div class="sidebar-header">
+    <h3>Menu</h3>
+    <button class="sidebar-close-btn">&times;</button>
+  </div>
+  <ul class="sidebar-menu">
+    <li><a href="/home">Home</a></li>
+    <li><a href="/profile/<%=user._id%>">Profile</a></li>
+    <li><a href="/message">Messages</a></li>
+    <li><a href="/settings">Settings</a></li>
+  </ul>
+</div>
+
+<!-- Main content -->
+<div class="main-content">
+  <!-- Page header -->
+  <header>
+    <button class="sidebar-open-btn">&#9776;</button>
+    <h1>Settings</h1>
+  </header>
+
+  <!-- Rest of the page content goes here -->
+</div>
+    
+    <div class="container">
+      <h1>Settings</h1>
+      <div class="tabs">
+        <button class="tab active" data-target="#account">Account</button>
+        <!-- <button class="tab" data-target="#privacy">Privacy</button>
+        <button class="tab" data-target="#notifications">Notifications</button> -->
+      </div>
+      <form action="/update" method="post" class="tab-content active" id="account">
+        <h2>Account Settings</h2>
+        <div class="form-group">
+          <label for="name">First Name</label>
+          <input type="text" name="first_name" id="name" value="<%= user.first_name %>">
+        </div>
+        <div class="form-group">
+          <label for="name">Last Name</label>
+          <input type="text" name="last_name" id="name" value="<%= user.last_name %>">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="phone"  name="phone" id="phone" value="<%= user.phone %>">
+        </div>
+        <div class="form-group">
+          <label for="password">Old Password</label>
+          <input type="password" name="oldpassword" id="old-password" value="">
+        </div>
+        <div class="form-group">
+          <label for="password">New Password</label>
+          <input type="password" name="newpassword" id="new-password" value="">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn account-btn">Save Changes</button>
+        </div>
+      </form>
+      <div class="tab-content active" id="privacy">
+        <h2>Privacy Settings</h2>
+        <div class="form-group">
+          <label for="visibility">Visibility</label>
+          <select id="visibility">
+            <option value="public">Public</option>
+            <option value="friends">Friends</option>
+            <option value="only-me">Only Me</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="blocklist">Block List</label>
+          <textarea id="blocklist">John Smith\nJane Doe\nMark Johnson</textarea>
+        </div>
+        <div class="form-group">
+          <button class="btn">Save Changes</button>
+        </div>
+      </div>
+      <div class="tab-content active" id="notifications">
+        <h2>Notification Settings</h2>
+        <div class="form-group">
+          <label for="email-notifications">Email Notifications</label>
+          <select id="email-notifications">
+            <option value="all">All</option>
+            <option value="important-only">Important Only</option>
+            <option value="none">None</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="push-notifications">Push Notifications</label>
+          <select id="push-notifications">
+            <option value="on">On</option>
+            <option value="off">Off</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <button class="btn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+    <script src="../javascripts/settings.js"></script>
+  </body>
+</html>

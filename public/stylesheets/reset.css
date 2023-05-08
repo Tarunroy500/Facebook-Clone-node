@@ -1,0 +1,67 @@
+.reset-password {
+    width: 500px;
+    margin: 200px auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .reset-password h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .button-group button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-continue {
+    background-color: #1877f2;
+    color: #fff;
+    border: none;
+  }
+  
+  .btn-continue:hover {
+    background-color: #0e62c7;
+  }
+  
+  .btn-cancel {
+    background-color: #f2f2f2;
+    color: #333;
+    border: none;
+  }
+  
+  .btn-cancel:hover {
+    background-color: #ccc;
+  }
+  

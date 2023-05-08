@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../stylesheets/message.css"/>
+  </head>
+  <body>
+    <!-- Sidebar navigation menu -->
+    <div class="sidebar-nav">
+      <div class="sidebar-header">
+        <h3>Menu</h3>
+        <button class="sidebar-close-btn">&times;</button>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/profile/">Profile</a></li>
+        <li><a href="/message">Messages</a></li>
+        <li><a href="/settings">Settings</a></li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="row clearfix">
+        <div class="col-lg-12">
+          <nav>
+            <button class="sidebar-open-btn">&#9776;</button>
+
+            <div class="logo">
+              <img src="../images/img/logo.svg" alt="" />
+            </div>
+            <div class="user-name"></div>
+            <div class="create">
+              <!-- <i class="fa fa-circle online"></i> -->
+              <h5><%= user.first_name %></h5>
+              <img
+                class="profile-photo"
+                src="<%= user.profile_picture %>"
+                alt=""
+              />
+            </div>
+          </nav>
+          <div class="card chat-app">
+            <div id="plist" class="people-list">
+              <ul class="group-list-unstyled chat-list mt-2 mb-0">
+                <% if(myGroups.length > 0){ %> <% myGroups.forEach(i => { %>
+                <li
+                  class="clearfix"
+                  data-id="<%= i._id %>"
+                  Name="<%= i.name %>"
+                >
+                  <img
+                    data-id="<%= i._id %>"
+                    src="<%= i.image %>"
+                    Name="<%= i.name %>"
+                    alt="avatar"
+                  />
+                  <div
+                    class="about"
+                    data-id="<%= i._id %>"
+                    Name="<%= i.name %>"
+
+                  >
+                    <div
+                      class="name"
+                      data-id="<%= i._id %>">
+                      <%= i.name %>
+                    </div>
+
+                    
+                  </div>
+                </li>
+                <% });} %>
+
+                <!-- show joined group -->
+                <% if(joinedGroups.length > 0){ %> 
+                  <% for(let i=0;i<joinedGroups.length;i++ ){ %>
+                  <li
+                    class="clearfix" 
+                    data-id="<%= joinedGroups[i]['group_id']['_id'] %>"
+                    Name="<%= joinedGroups[i]['group_id']['name'] %>"
+                  >
+                    <img
+                      data-id="<%= joinedGroups[i]['group_id']['_id'] %>"
+                      src="<%= joinedGroups[i]['group_id']['image'] %>"
+                      alt="avatar" Name="<%= joinedGroups[i]['group_id']['name'] %>"
+                    />
+                    <div
+                      class="about" Name="<%= joinedGroups[i]['group_id']['name'] %>"
+                      data-id="<%= joinedGroups[i]['group_id']['_id'] %>"
+  
+                    >
+                      <div
+                        class="name" Name="<%= joinedGroups[i]['group_id']['name'] %>"
+                        data-id="<%= joinedGroups[i]['group_id']['_id'] %>">
+                        <%=joinedGroups[i]['group_id']['name'] %>
+                      </div>
+  
+                      
+                    </div>
+                  </li>
+                  <% };} %>
+              </ul>
+            </div>
+
+            <div class="chat">
+              <div class="chat-header clearfix">
+                <div class="row"></div>
+              </div>
+              <div class="group-chat-history">
+                <ul class="chats-contain">
+                  <div id="group-chat-container">
+                    
+                  </div>
+                </ul>
+              </div>
+
+              <form class="group-chat-message">
+                <div class="input-group mb-0">
+                  
+                  <input
+                    name="message"
+                    id="group-message"
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter text here..."
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">send</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+    integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+     function GroupupdateScroll() {
+      var element = document.querySelector("#group-chat-container");
+      setTimeout(() => {
+        element.scrollTop = element.scrollHeight;
+      }, 100);
+    }
+    var global_group_id;
+    var sender_id = "<%=user._id %>";
+    var receiver_id;
+    var socket = io("/user-namespace", {
+      auth: {
+        token: "<%=user._id %>",
+      },
+    });
+    document
+      .querySelector(".group-list-unstyled")
+      .addEventListener("click", function (e) {
+        document.querySelector(".group-chat-history").style.display = "block";
+        document.querySelector(".group-chat-message").style.display = "flex";
+        global_group_id=e.target.getAttribute("data-id");
+        Name=e.target.getAttribute("Name");
+        console.log(Name);
+        console.log(global_group_id);
+        document.querySelector(".user-name").innerHTML = `<h5>${Name}</h5>`;
+        
+        loadGroupChats()
+      });
+
+      $(".group-chat-message").submit(function (e) {
+      e.preventDefault();
+      var message = $("#group-message").val();
+      $.ajax({
+        url: "/group-save-chat",
+        type: "POST",
+        data: {
+          sender_id: sender_id,
+          group_id: global_group_id,
+          message: message,
+        },
+        success: function (response) {
+          if (response.success) {
+            console.log(response.chat);
+            $("#group-message").val("");
+            let message = response.chat.message;
+            
+            let html =
+              `<li class="group-clearfix" >
+                <div class="message other-message float-right" id='`+response.chat._id+`'">` +message +`
+                  </div>`;
+                
+                        
+                      html +=`
+                        <h5 class="grpmemName float-right">Me:</h5>
+                    </li>`;
+
+            $("#group-chat-container").append(html);
+            socket.emit("newGroupChat", response.chat);
+            GroupupdateScroll()
+          } else {
+            alert(response.msg);
+          }
+        },
+      });
+    });
+    socket.on('loadNewGroupChat',function(data){
+      if(global_group_id == data.group_id){
+        let html =
+              `<li class="group-clearfix" >
+                      <div class="message my-message" id='`+data._id+`'">` +data.message +`
+                        </div>`;
+            
+                        
+                        
+                    html+=`
+                    <h5 class="grpmemName ">`+data.sender_id.first_name+`</h5>
+                    </li>`;
+
+            $("#group-chat-container").append(html);
+      }
+    })
+
+    function loadGroupChats(){
+      $.ajax({
+        url:"/load-group-chats",
+        type:"POST",
+        data:{group_id:global_group_id},
+        success:function(res){
+          if(res.success){
+            var chats = res.chats
+            var html='';
+            for(let i=0;i<chats.length;i++){
+              let className ='message my-message';
+              if(chats[i]['sender_id']._id == sender_id){
+                className ='message other-message float-right'
+              }
+              html+=`<li class="clearfix" >
+                      <div class="`+className+`" id='`+chats[i]['_id']+`'">` +chats[i]['message'] +``
+                        html +=`
+                        </div>`;
+
+                        if(chats[i]['sender_id']._id == sender_id){
+                          html+=`
+                          <h5 class="grpmemName float-right">Me:</h5>
+                          `;
+                        }else{
+                          html+=`
+                          <h5 class="grpmemName ">`+chats[i]['sender_id'].first_name+`</h5>
+                          `;
+                        }
+                        html +=`
+                    </li>`
+            }
+            $('#group-chat-container').html(html);
+            GroupupdateScroll()
+
+          }else{
+            alert(res.msg);
+          }
+        }
+      })
+    }
+  </script>
+  <script>
+    let sidebarNav = document.querySelector(".sidebar-nav");
+    let sidebarOpenBtn = document.querySelector(".sidebar-open-btn");
+    let sidebarCloseBtn = document.querySelector(".sidebar-close-btn");
+
+    sidebarOpenBtn.addEventListener("click", () => {
+      sidebarNav.classList.add("open");
+    });
+
+    sidebarCloseBtn.addEventListener("click", () => {
+      sidebarNav.classList.remove("open");
+    });
+  </script>
+</html>

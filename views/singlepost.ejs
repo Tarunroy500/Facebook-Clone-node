@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Post</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f2f5;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        padding-top: 100px;
+        height: 100vh;
+        gap: 20px;
+      }
+      .post {
+        background-color: #ffffff;
+        padding: 20px;
+        width: 50%;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .comments {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #ffffff;
+        padding: 20px;
+        width: 50%;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        height: 100%;
+      }
+      .comment-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .comment-nav h2 {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 0;
+      }
+      .comment-nav .add-cmt {
+        cursor: pointer;
+      }
+      .comment-nav a:hover {
+        color: #1565c0;
+      }
+      .comment-nav a i {
+        margin-right: 5px;
+        font-size: 20px;
+      }
+      .main-comments {
+        height: 100%;
+        padding: 10px 0;
+        overflow-y: scroll;
+      }
+      .comment {
+        display: flex;
+      }
+      .comment-header {
+        width: 100px;
+        border-radius: 50%;
+        padding: 7px;
+      }
+      .comment-body {
+        padding: 10px 0;
+        margin-left: 10px;
+        width: 140%;
+      }
+      .dlt-cmt {
+        padding: 5px;
+        border-radius: 5px;
+        background-color: rgba(255, 0, 0, 0.609);
+        cursor: pointer;
+        float: right;
+      }
+      .dlt-cmt img {
+        width: 20px;
+        height: 20px;
+      }
+      .comment-body h2 {
+        font-size: 15px;
+        font-weight: bold;
+        margin: 0;
+      }
+      .comment-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        gap: 10px;
+      }
+      .comment-footer input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        font-size: 16px;
+      }
+      .comment-footer input:focus {
+        border: 1px solid #1877f2;
+      }
+      .comment-footer button {
+        background-color: #1877f2;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .post-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .post-header img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      .post-header h2 {
+        font-size: 20px;
+        font-weight: bold;
+        margin: 0;
+      }
+      .post-body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+      .post-image {
+        /* width: 100%; */
+        height: 70%;
+        object-fit: cover;
+        margin-bottom: 20px;
+      }
+      .post-video {
+        width: 100%;
+        object-fit: cover;
+        margin-bottom: 20px;
+      }
+      .post-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid #ccc;
+        padding-top: 10px;
+      }
+      .post-footer a {
+        color: #888;
+        text-decoration: none;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+      }
+      .post-footer a:hover {
+        color: #555;
+      }
+      .post-footer a i {
+        margin-right: 5px;
+        font-size: 20px;
+      }
+      .post-footer span {
+        color: #888;
+        font-size: 16px;
+      }
+      .post-footer span i {
+        margin-right: 5px;
+        font-size: 20px;
+        color: #888;
+      }
+      .post-footer button {
+        background-color: #1877f2;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 16px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .post-footer button:hover {
+        background-color: #1565c0;
+      }
+      nav {
+        padding: 10px 12vmax;
+      }
+      @media screen and (max-width: 600px) {
+        .post-header h2 {
+          font-size: 18px;
+        }
+
+        .post-body {
+          font-size: 16px;
+        }
+
+        .post-footer a i,
+        .post-footer span i {
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <a href="/">
+          <h2 class="logo"><span>Facebook</span></h2>
+        </a>
+        <div class="search-bar">
+          <img src="../images/icon/search.svg" class="icon2" />
+          <input
+            type="search"
+            placeholder="search for Friends..."
+            class="searchinp"
+          />
+          <div class="searchbox"></div>
+        </div>
+        <div class="create">
+          <div class="profile-phots">
+            <img
+              src="<%= user?.profile_picture %>"
+              alt=""
+              onclick="toggleMenu()"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <a href="/profile/<%= user?._id %>" class="user-info">
+            <div class="profile-phots">
+              <img src="<%= user?.profile_picture %>" alt="" />
+            </div>
+            <h3>&nbsp;<%= user?.first_name %></h3>
+          </a>
+          <hr />
+          <a href="/profile/<%=user?._id%>" class="sub-menu-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"
+              ></path>
+            </svg>
+            <p>&nbsp;Edit profile</p>
+            <span>></span>
+          </a>
+          <a href="/settings" class="sub-menu-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM12 3.311L4.5 7.65311V16.3469L12 20.689L19.5 16.3469V7.65311L12 3.311ZM12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12C16 14.2091 14.2091 16 12 16ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"
+              ></path>
+            </svg>
+            <p>&nbsp;Settings & profile</p>
+            <span>></span>
+          </a>
+          <a href="#" class="sub-menu-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 15H13V17H11V15ZM13 13.3551V14H11V12.5C11 11.9477 11.4477 11.5 12 11.5C12.8284 11.5 13.5 10.8284 13.5 10C13.5 9.17157 12.8284 8.5 12 8.5C11.2723 8.5 10.6656 9.01823 10.5288 9.70577L8.56731 9.31346C8.88637 7.70919 10.302 6.5 12 6.5C13.933 6.5 15.5 8.067 15.5 10C15.5 11.5855 14.4457 12.9248 13 13.3551Z"
+              ></path>
+            </svg>
+            <p>&nbsp;Help & Support</p>
+            <span>></span>
+          </a>
+          <a href="/logout" class="sub-menu-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                d="M4 18H6V20H18V4H6V6H4V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V18ZM6 11H13V13H6V16L1 12L6 8V11Z"
+              ></path>
+            </svg>
+            <p>&nbsp;Logout</p>
+            <span>></span>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="post">
+        <a href="/profile/<%=post.author._id%>">
+          <div class="post-header">
+            <img src="<%= post.author.profile_picture  %>" alt="Avatar" />
+            <h2><%= post.author.first_name %></h2>
+          </div>
+        </a>
+        <% if(post.filetype == "video") { %>
+        <video class="post-video" controls>
+          <source src="<%= post?.file %>" type="video/mp4" />
+        </video>
+        <% } else if (post.filetype == "image") { %>
+        <img class="post-image" src="<%= post?.file %>" alt="Post Image" />
+        <% } %>
+        <div class="post-body"><%= post?.title %></div>
+        <div class="post-footer">
+          <!-- <a href="#"> <i class="fas fa-thumbs-up"></i>Like </a> -->
+          <% if(user){ %>
+          <a href="/like/<%= post?._id %>">
+            <% if(post.likes.includes(user?._id)){ %>
+            <img src="../images/icon/heart-fill.svg" class="icon2" />
+            <% } else { %>
+            <img src="../images/icon/heart.svg" class="icon2" />
+            <% } %> &nbsp; <%= post.likes.length %> &nbsp;Like
+          </a>
+          <% } else { %>
+          <a href="/home">
+            <img src="../images/icon/heart.svg" class="icon2" />
+            <%= post.likes.length %> &nbsp;Like
+          </a>
+          <% } %>
+          <a href="#"> <i class="fas fa-comment"></i>Comment </a>
+          <a
+            href="http://web.whatsapp.com/send?text=http://localhost:3000/singlepost/<%= post?._id %>"
+            target="_blank"
+          >
+            <i class="fas fa-share"></i>Share
+          </a>
+          <!-- <span><i class="fas fa-clock"></i> <%= new Date(post.date).toTimeString() %></span> -->
+          <% if(post?.author._id.toString() == user?._id.toString()) { %>
+          <a href="/deletepost/<%= post?._id %>">
+            <i class="fas fa-trash"></i>Delete
+          </a>
+          <% }else if(user?.friends.includes(post?.author._id)) { %>
+          <a href="/unfriend/<%= post?.author._id %>">
+            <i class="fas fa-user-minus"></i>friends
+          </a>
+          <% } else if(user?.friend_requests_sent.includes(post?.author._id)) {
+          %>
+          <a href="/cancelrequest/<%= post?.author._id %>">
+            <i class="fas fa-user-minus"></i>Cancel Request
+          </a>
+          <% } else if(user){ %>
+          <a href="/friendrequest/<%= post?.author._id %>">
+            <i class="fas fa-user-plus"></i>Add Friend
+          </a>
+          <% }else{ %>
+          <a href="/"> <i class="fas fa-user-plus"></i>Follow </a>
+          <% } %>
+          <!-- <button>Follow</button> -->
+        </div>
+      </div>
+      <div class="comments">
+        <div class="comment-nav">
+          <h2><%= post.comments.length %> Comments</h2>
+          <div class="add-cmt"><i class="fas fa-plus"></i> Add Comment</div>
+        </div>
+        <div class="main-comments">
+          <% post.comments.forEach(comment => { %>
+          <div class="comment">
+            <div class="comment-header">
+              <img src="<%= comment.author.profile_picture %>" alt="Avatar" />
+            </div>
+            <div class="comment-body">
+              <strong
+                ><%= comment.author.first_name %> <%= comment.author.last_name
+                %></strong
+              >
+              <%= comment.comment %>
+              <% if(comment.author._id.toString() == user?._id.toString()) { %>
+              <a class="dlt-cmt" href="/deletecomment/<%= post._id %>/<%= comment._id %>">
+                <img src="../images/icon/bin.svg" alt="" />
+              </a>
+              <% } %>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+        <form
+          action="/comment/<%= post._id %>"
+          method="post"
+          class="comment-footer"
+        >
+          <input
+            type="text"
+            name="comment"
+            id="comment"
+            class="single-comment"
+            placeholder="Add a comment"
+          />
+          <button type="submit">Comment</button>
+        </form>
+      </div>
+    </div>
+    <script>
+      let subMenu = document.querySelector("#subMenu");
+      let singleComment = document.querySelector(".single-comment");
+      let addcmt = document.querySelector(".add-cmt");
+
+      function toggleMenu() {
+        subMenu.classList.toggle("open-menu");
+      }
+      addcmt.addEventListener("click", () => {
+        singleComment.focus();
+      });
+    </script>
+  </body>
+</html>

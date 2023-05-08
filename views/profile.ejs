@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Facebook</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="css/all.min.css" />
+
+    <link rel="stylesheet" type="text/css" href="../stylesheets/profile.css" />
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+  </head>
+
+  <body>
+    <div class="popup-overlay">
+      <div class="popup">
+        <div class="popup-header">
+          <h2>Edit Profile</h2>
+          <button class="close-btn">&times;</button>
+        </div>
+        <div class="popup-content">
+          <form>
+            <h3>Education</h3>
+            <input
+              class="went_to"
+              type="text"
+              name="went_to"
+              placeholder="School"
+              value="<%= loggedInUser.went_to %>"
+            />
+            <input
+              class="degree"
+              type="text"
+              name="degree"
+              placeholder="Degree"
+              value="<%= loggedInUser.degree %>"
+            />
+            <input
+              type="text"
+              class="field_of_study"
+              name="field_of_study"
+              placeholder="Field of Study"
+              value="<%= loggedInUser.field_of_study %>"
+            />
+
+            <h3>Places Lived</h3>
+            <input
+              class="lives_in"
+              type="text"
+              name="lives_in"
+              placeholder="Current City"
+              value="<%= loggedInUser.lives_in %>"
+            />
+            <input
+              class="from"
+              type="text"
+              name="from"
+              placeholder="Hometown"
+              value="<%= loggedInUser.from %>"
+            />
+
+            <h3>Contact Info</h3>
+            <input
+              class="website"
+              type="text"
+              name="website"
+              placeholder="Website"
+              value="<%= loggedInUser.website %>"
+            />
+
+            <h3>Basic Info</h3>
+            <input
+              class="birthdate"
+              type="date"
+              name="birthdate"
+              placeholder="Birthdate"
+              value="<%= loggedInUser.birthdate %>"
+            />
+            <select class="gender" name="gender">
+              <option value="">Gender</option>
+              <% ["male","female","others"].forEach(elem=>{ %> <% if(elem ===
+              loggedInUser.gender){ %>
+              <option selected value="<%= elem %>"><%= elem %></option>
+              <% }else{ %>
+              <option value="<%= elem %>"><%= elem %></option>
+              <% } %> <% }) %>
+            </select>
+          </form>
+        </div>
+        <div class="popup-footer">
+          <button class="cancel-btn">Cancel</button>
+          <button type="submit" class="save-btn save-edit">Save</button>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <div class="container nav-container">
+        <a href="/home">
+          <h2 class="logo"><span>Facebook</span></h2>
+        </a>
+        <div class="create">
+          <div class="profile-phots">
+            <img
+              src="<%= loggedInUser.profile_picture %>"
+              alt=""
+              onclick="toggleMenu()"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <a href="/profile/<%= loggedInUser._id %>" class="user-info">
+            <div class="profile-phots">
+              <img src="<%= loggedInUser.profile_picture %>" alt="" />
+            </div>
+            <h3>&nbsp;<%= loggedInUser.first_name %></h3>
+          </a>
+          <hr />
+          <a href="/profile/<%=loggedInUser._id%>" class="sub-menu-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"
+              ></path>
+            </svg>
+            <p>&nbsp;Edit profile</p>
+            <span>></span>
+          </a>
+          <a href="/settings" class="sub-menu-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM12 3.311L4.5 7.65311V16.3469L12 20.689L19.5 16.3469V7.65311L12 3.311ZM12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12C16 14.2091 14.2091 16 12 16ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"
+              ></path>
+            </svg>
+            <p>&nbsp;Settings & profile</p>
+            <span>></span>
+          </a>
+          <a href="#" class="sub-menu-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 15H13V17H11V15ZM13 13.3551V14H11V12.5C11 11.9477 11.4477 11.5 12 11.5C12.8284 11.5 13.5 10.8284 13.5 10C13.5 9.17157 12.8284 8.5 12 8.5C11.2723 8.5 10.6656 9.01823 10.5288 9.70577L8.56731 9.31346C8.88637 7.70919 10.302 6.5 12 6.5C13.933 6.5 15.5 8.067 15.5 10C15.5 11.5855 14.4457 12.9248 13 13.3551Z"
+              ></path>
+            </svg>
+            <p>&nbsp;Help & Support</p>
+            <span>></span>
+          </a>
+          <a href="/logout" class="sub-menu-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                d="M4 18H6V20H18V4H6V6H4V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V18ZM6 11H13V13H6V16L1 12L6 8V11Z"
+              ></path>
+            </svg>
+            <p>&nbsp;Logout</p>
+            <span>></span>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <div class="popop-background"></div>
+    <div class="thim-div">
+      <div class="hadr-thim-bar">
+        <span id="thim-button" class="fas fa-caret-right"></span>
+
+        <p>Backgroun</p>
+        <div class="bg-color">
+          <div id="bg-c-1" class="bg-color-1"></div>
+          <div id="bg-c-2" class="bg-color-2"></div>
+          <div id="bg-c-3" class="bg-color-3"></div>
+          <div id="bg-c-4" class="bg-color-4"></div>
+          <div id="bg-c-5" class="bg-color-5"></div>
+          <div id="bg-c-6" class="bg-color-6"></div>
+        </div>
+        <br />
+        <p>Text Color</p>
+        <div class="bg-color">
+          <div id="txt-c-1" class="bg-color-1"></div>
+          <div id="txt-c-2" class="bg-color-2"></div>
+          <div id="txt-c-3" class="bg-color-3"></div>
+          <div id="txt-c-4" class="bg-color-4"></div>
+          <div id="txt-c-5" class="bg-color-5"></div>
+          <div id="txt-c-6" class="bg-color-6"></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="cover-image-section">
+      <header class="cover-hader-site">
+        <img id="Cover_image" src="<%= user.cover_photo %>" />
+        <div class="cover-image-div">
+          <div class="cover-image-edite-btn">
+            <% if(loggedInUser._id.toString() === user._id.toString()){ %>
+            <button id="cover-image-btn">
+              <i class="fas fa-camera"></i>
+              Edit Cover Photo
+            </button>
+            <% } %>
+            <input
+              type="file"
+              name="cover_photo"
+              id="inp_file2"
+              style="display: none"
+            />
+          </div>
+        </div>
+      </header>
+    </section>
+
+    <section class="profile-section">
+      <div class="profile-section-in">
+        <div class="profile-image-site">
+          <div class="profile-image-div">
+            <a id="profile-link">
+              <img id="Profile_images" src="<%= user.profile_picture %>" />
+              <% if(loggedInUser._id.toString() === user._id.toString()){ %>
+              <input
+                type="file"
+                name="profile_image"
+                id="inp_file"
+                style="display: none"
+              />
+              <% } %>
+            </a>
+            <span class="fas fa-camera"></span>
+          </div>
+        </div>
+        <div class="profile-name-info">
+          <h1>
+            <span class="pro-txt" id="profile_name"
+              ><%= user.first_name %> <%= user.last_name %></span
+            >
+            <span id="nik-name"></span>
+          </h1>
+          <p>
+            <span class="fir-count-txt">
+              <span id="friend_count"> <%= user.friends.length %> </span>
+              Friends |
+            </span>
+            <% if(loggedInUser._id.toString() === user._id.toString()){ %>
+            <span class="sec-count-txt">
+              <span id="post_count"> <%= user.posts.length %> </span>
+              Posts
+            </span>
+            <% }else{ %> <% if(loggedInUser.blocked.includes(user._id)){ %>
+            <a class="unblock-btn" href="/block/<%= user._id %>">
+              <span>
+                <i class="fas fa-user-check"></i>
+                Unblock
+              </span>
+            </a>
+            <% }else{ %>
+            <a class="block-btn" href="/block/<%= user._id %>">
+              <span>
+                <i class="fas fa-user-check"></i>
+                Block
+              </span>
+            </a>
+            <% } %> <% } %>
+          </p>
+        </div>
+
+        <div class="profile-button-site">
+          <% if(loggedInUser._id.toString() === user._id.toString()){ %>
+          <div class="btn-site-pro">
+            <span>
+              <i class="fas fa-plus-circle"></i>
+              Add to Storry
+            </span>
+            <span class="edit-profile-btn">
+              <i class="fas fa-pen"></i>
+              Edit Profile
+            </span>
+          </div>
+          <% }else{ %> <% if(user.friends.filter(e => e._id.toString() ===
+          loggedInUser._id.toString() ).length > 0){ %>
+          <div class="btn-site-pro">
+            <a href="/unfriend/<%= user._id %>">
+              <span>
+                <i class="fas fa-user-check"></i>
+                Friends
+              </span>
+            </a>
+          </div>
+          <% }else{ %> <%
+          if(user.friend_requests_received.includes(loggedInUser._id)){ %>
+          <a href="/friendrequest/<%= user._id %>" class="btn-site-pro">
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+              >
+                <path
+                  d="M14 14.252V16.3414C13.3744 16.1203 12.7013 16 12 16C8.68629 16 6 18.6863 6 22H4C4 17.5817 7.58172 14 12 14C12.6906 14 13.3608 14.0875 14 14.252ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11ZM19 17.5858L21.1213 15.4645L22.5355 16.8787L20.4142 19L22.5355 21.1213L21.1213 22.5355L19 20.4142L16.8787 22.5355L15.4645 21.1213L17.5858 19L15.4645 16.8787L16.8787 15.4645L19 17.5858Z"
+                  fill="rgba(255,255,255,1)"
+                ></path>
+              </svg>
+              Cancel Request
+            </span>
+          </a>
+          <% }else{ %>
+          <a href="/friendrequest/<%= user._id %>" class="btn-site-pro">
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+              >
+                <path
+                  d="M14 14.252V16.3414C13.3744 16.1203 12.7013 16 12 16C8.68629 16 6 18.6863 6 22H4C4 17.5817 7.58172 14 12 14C12.6906 14 13.3608 14.0875 14 14.252ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11ZM18 17V14H20V17H23V19H20V22H18V19H15V17H18Z"
+                  fill="rgba(254,254,254,1)"
+                ></path>
+              </svg>
+              Add Friend
+            </span>
+          </a>
+          <% } %> <% } %> <% } %>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section class="full-navbar">
+      <nav class="navbar-site">
+        <ul compact="txt-color-c">
+          <a href="#">
+            <li class="txt-cc activ-navbar">Posts</li>
+          </a>
+          <a href="#">
+            <li class="txt-cc">About</li>
+          </a>
+          <a href="#">
+            <li class="txt-cc">Friends</li>
+          </a>
+          <a href="#" id="photo-nav">
+            <li class="txt-cc">Photo</li>
+          </a>
+          <a href="#" id="video-nav">
+            <li class="txt-cc">Video</li>
+          </a>
+          <a href="#" id="likes-nav">
+            <li class="txt-cc">Likes</li>
+          </a>
+          <a href="#">
+            <li class="txt-cc">More <i class="fas fa-caret-down"></i></li>
+          </a>
+        </ul>
+
+        <div class="nav-btn">
+          <i class="fas fa-ellipsis-h"></i>
+        </div>
+      </nav>
+    </section> -->
+
+    <section class="post-section">
+      <div class="post-section-in">
+        <section class="info-section">
+          <div class="about-info">
+            <h4>Intro</h4>
+            <p id="bio-text"><%= user.first_name %> <%= user.last_name %></p>
+            <div class="bio-btn-click">
+              <input
+                class="input-box"
+                type="text"
+                value="<%= user.first_name %> <%= user.last_name %>"
+              />
+              <p class="length-count-txt">
+                <span id="length-count">101</span> characters remaining
+              </p>
+              <div class="putlic-c-o-btn">
+                <div>
+                  <p><span class="fas fa-globe-europe"></span> Public</p>
+                </div>
+                <div class="button-site-js">
+                  <button id="cencel-btn">Cencel</button>
+                  <button id="save-btn">Save</button>
+                </div>
+              </div>
+            </div>
+            <button id="bio-edit-btn" class="edit-bio btn">Edit Bio</button>
+
+            <ul>
+              <li>
+                Went to
+                <span class="went_to"> <%= user.went_to %> </span>
+              </li>
+              <li>
+                Lives in
+                <span class="lives_in"> <%= user?.lives_in %> </span>
+              </li>
+              <li>
+                From
+                <span class="from"> <%= user?.from %> </span>
+              </li>
+              <li><%= user.gender %></li>
+              <li>
+                <i class="fas fa-globe"></i> <a href="#"><%= user.email %></a>
+              </li>
+            </ul>
+            <div class="box-design friends-site">
+              <span
+                >Friends <br />
+                <p>
+                  <span> <%= user.friends.length %></span>
+                  Friends
+                </p>
+              </span>
+              <div class="see-all-images"><a href="#">See All Friends</a></div>
+              <div class="at9-images">
+                <% user.friends.forEach(function(friend){ %>
+                <a class="images-div" href="/profile/<%= friend._id %>">
+                  <img id="frind-image-1" src="<%= friend.profile_picture %>" />
+                  <p><%= friend.first_name %>&nbsp;<%= friend.last_name %></p>
+                </a>
+                <% }) %>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="post-info">
+          <div class="box-design">
+            <div class="post-upload-T">
+              <div class="profil-ing-div">
+                <a href="#" id="profile-link">
+                  <img id="Profile_images" src="<%= user.profile_picture %>" />
+                </a>
+              </div>
+              <div class="text-post">
+                <span>What's on your mind?</span>
+              </div>
+            </div>
+            <div class="photo-upload">
+              <div class="post-upl">
+                <p><i class="fas fa-video"></i> Live Video</p>
+              </div>
+              <div class="post-upl">
+                <p><i class="fas fa-images"></i> Photo/Video</p>
+              </div>
+              <div class="post-upl">
+                <p><i class="fas fa-flag"></i> Life Event</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="box-design post-filter">
+            <div class="filter-site">
+              <span>Posts</span>
+              <div class="fil-ter">
+                <button><i class="fas fa-sliders-h"></i> Filters</button>
+
+                <button><i class="fas fa-cog"></i> Manager Posts</button>
+              </div>
+            </div>
+
+            <div class="list-type">
+              <div class="fil-list activ-navbar">
+                <i class="fas fa-bars"></i> List View
+              </div>
+              <div class="fil-list">
+                <i class="fas fa-th-large"></i> Grid View
+              </div>
+            </div>
+          </div>
+
+          <!-- ************ Post ************ -->
+          <% user.posts.forEach(function(post){ %>
+          <div class="box-design post-div">
+            <div class="post-infarmation">
+              <div>
+                <div class="profil-ing-div post-profile-img">
+                  <a href="#" id="profile-link">
+                    <img
+                      id="Profile_images"
+                      src="<%= user.profile_picture %>"
+                    />
+                  </a>
+                </div>
+              </div>
+              <div class="post-three-dot">
+                <h2>
+                  <a href="#" id="profile_name"
+                    ><%= user.first_name %> <%= user.last_name %></a
+                  >
+                </h2>
+                <p>
+                  <a href="%">5d</a>
+                  <span>
+                    <i id="public-btn-i" class="fas fa-user-friends"></i>
+                  </span>
+                </p>
+
+                <span class="thre-dto-btn fas fa-ellipsis-h"></span>
+              </div>
+            </div>
+
+            <p class="post-hader-text" id="post_h_T">Hello World.</p>
+            <% if(post.filetype == "image"){ %>
+            <img
+              id="post-image-12"
+              class="post-images"
+              src="<%= post.file %>"
+            />
+            <% }else if(post.filetype == "video"){ %>
+            <video
+              id="post-image-12"
+              class="post-images"
+              src="<%= post.file %>"
+              style="width: 100%"
+              controls
+            ></video>
+            <% }else { %>
+            <h3><%= post.title %></h3>
+            <% } %>
+
+            <div class="post-info-input">
+              <div class="lilowow-cs">
+                <div class="llw-count">
+                  <div class="icon-show top">
+                    <img src="images/icon/wow.png" />
+                  </div>
+                  <div class="icon-show mid like-icon-bg">
+                    <i class="fas fa-thumbs-up"></i>
+                  </div>
+                  <div class="icon-show low love-icon-bg">
+                    <i class="fas fa-heart"></i>
+                  </div>
+                  <div>
+                    <p class="l-count"><span>11</span></p>
+                  </div>
+                </div>
+
+                <div>
+                  <p>
+                    <a href="#"><%= post.likes.length %> Likes</a>
+
+                    <a href="#"><%= post.comments.length %> comments</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="actavite">
+              <div class="lcs-btn lcs-btn_i">
+                <a href="/like/<%= post._id %>">
+                  <p>
+                    <i id="post-icon-btn_i" class="far fa-thumbs-up"></i>
+                    <span id="post-icon-text_i">Like</span>
+                  </p>
+                </a>
+              </div>
+              <div class="lcs-btn">
+                <p><i class="far fa-comment-alt"></i> Comment</p>
+              </div>
+              <div class="lcs-btn">
+                <p><i class="fas fa-share"></i> Share</p>
+              </div>
+            </div>
+
+            <div class="comment-site">
+              <div class="profil-ing-div">
+                <a href="#" id="profile-link">
+                  <img id="Profile_images" src="<%= user.profile_picture %>" />
+                </a>
+              </div>
+              <form
+                class="comment-input"
+                action="/comment/<%= post._id %>"
+                method="POST"
+              >
+                <input
+                  type="text"
+                  name="comment"
+                  placeholder="Write a comment…"
+                />
+              </form>
+            </div>
+          </div>
+          <% }) %>
+        </section>
+      </div>
+    </section>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.6/axios.min.js"
+      integrity="sha512-06NZg89vaTNvnFgFTqi/dJKFadQ6FIglD6Yg1HHWAUtVFFoXli9BZL4q4EO1UTKpOfCfW5ws2Z6gw49Swsilsg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      var went_to = document.querySelector(".went_to");
+      var degree = document.querySelector(".degree");
+      var field_of_study = document.querySelector(".field_of_study");
+      var website = document.querySelector(".website");
+      var birthdate = document.querySelector(".birthdate");
+      var lives_in = document.querySelector(".lives_in");
+      var from = document.querySelector(".from");
+      var popupOverlay = document.querySelector(".popup-overlay");
+      var saveedit = document.querySelector(".save-edit");
+      var went_to = document.querySelector(".went_to");
+      var lives_in = document.querySelector(".lives_in");
+      var from = document.querySelector(".from");
+      var gender = document.querySelector(".gender");
+
+      async function Saveedit() {
+        console.log("gender", gender.value);
+        const user = {
+          went_to: went_to.value,
+          lives_in: lives_in.value,
+          from: from.value,
+          field_of_study: field_of_study.value,
+          degree: degree.value,
+          website: website.value,
+          birthdate: birthdate.value,
+          gender: gender.value,
+        };
+
+        await axios.post("/save-edit", user).then((res) => {
+          if (res.data.message === "success") {
+            popupOverlay.style.display = "none";
+            went_to.innerHTML = res.data.user.went_to;
+            lives_in.innerHTML = res.data.user.lives_in;
+            from.innerHTML = res.data.user.from;
+          }
+        });
+      }
+      saveedit.addEventListener("click", Saveedit);
+    </script>
+    <script>
+      let sidebarNav = document.querySelector(".sidebar-nav");
+      let sidebarOpenBtn = document.querySelector(".sidebar-open-btn");
+      let sidebarCloseBtn = document.querySelector(".sidebar-close-btn");
+
+      sidebarOpenBtn.addEventListener("click", () => {
+        sidebarNav.classList.add("open");
+      });
+
+      sidebarCloseBtn.addEventListener("click", () => {
+        sidebarNav.classList.remove("open");
+      });
+    </script>
+
+    <script>
+      var editBtn = document.querySelector(".edit-profile-btn");
+      var popupOverlay = document.querySelector(".popup-overlay");
+      var closeBtn = document.querySelector(".close-btn");
+      var cancelBtn = document.querySelector(".cancel-btn");
+
+      editBtn.addEventListener("click", function () {
+        popupOverlay.style.display = "block";
+      });
+
+      closeBtn.addEventListener("click", function () {
+        popupOverlay.style.display = "none";
+      });
+
+      cancelBtn.addEventListener("click", function () {
+        popupOverlay.style.display = "none";
+      });
+
+      var Profile_images = document.getElementById("Profile_images");
+      var Cover_image = document.getElementById("Cover_image");
+      var coverimagebtn = document.getElementById("cover-image-btn");
+      var inp_file = document.getElementById("inp_file");
+      var inp_file2 = document.getElementById("inp_file2");
+      Profile_images.onclick = function () {
+        inp_file.click();
+      };
+      inp_file.onchange = function (e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function () {
+          Profile_images.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+        const formData = new FormData();
+        formData.append("profile_image", file);
+        axios
+          .post("/uploadprofile", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((res) => {
+            console.log(res);
+          });
+      };
+      coverimagebtn.onclick = function () {
+        inp_file2.click();
+      };
+      inp_file2.onchange = function (e) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        reader.onload = function () {
+          Cover_image.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+        const formData = new FormData();
+        formData.append("cover_image", file);
+        axios
+          .post("/uploadcover", formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((res) => {
+            console.log(res);
+          });
+      };
+    </script>
+    <script>
+      let subMenu = document.querySelector("#subMenu");
+
+      function toggleMenu() {
+        subMenu.classList.toggle("open-menu");
+      }
+    </script>
+  </body>
+</html>

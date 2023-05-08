@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  </head>
+  <link
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="../stylesheets/group.css" />
+  <body>
+    <div class="sidebar-nav">
+      <div class="sidebar-header">
+        <h3>Menu</h3>
+        <button class="sidebar-close-btn">&times;</button>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="/home">Home</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/message">Messages</a></li>
+        <li><a href="/settings">Settings</a></li>
+      </ul>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+      <!-- Page header -->
+      <header>
+        <button class="sidebar-open-btn">&#9776;</button>
+        <h1>Groups</h1>
+      </header>
+
+      <!-- Rest of the page content goes here -->
+    </div>
+
+    <!-- <div class="mb-4">Groups</div> -->
+    <div class="container">
+    <!-- Button trigger modal -->
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#createGroupModal"
+    >
+      Create Group
+    </button>
+    <% if(typeof message !== 'undefined'){ %>
+      <p style="color: green"><%=message%></p>
+
+    <% } %>
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Limit</th>
+          <th>Members</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if(groups.length > 0){%>
+            <% for(let i=0;i<groups.length;i++){%>
+                <tr>
+                    <td><%=i+1%></td>
+                    <td>
+                        <img id="group-profile" src="http://localhost:3000/<%=groups[i]['image']%>" alt="<%=groups[i]['name']%>">
+                    </td>
+                    <td>
+                        <%=groups[i]['name']%>
+                    </td>
+                    <td>
+                        <%=groups[i]['limit']%>
+                    </td>
+                    <td>
+                        <a class="cursor-pointer addMember" data-id="<%=groups[i]['_id']%>" data-limit="<%=groups[i]['limit']%>" data-toggle="modal" data-target="#memberModal">Members</a>
+                    </td>
+                </tr>
+           <% }%>
+            
+         <%}else{%>
+        <tr>
+            <td>no groups found</td>
+        </tr>
+
+        <%}%>
+      </tbody>
+    </table>
+    <!-- Member Modal -->
+
+    <div class="modal fade" id="memberModal" tabindex="1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Members</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="" id="add-member-form">
+            <div class="modal-body">
+              <input type="hidden" name="group_id" id="group_id">
+              <input class="limit" type="hidden" name="limit" id="limit">
+              <table class="table">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2">
+                            <div class="addMemberTable">
+                                <table class="table addMembersInTable">
+
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+                <p id="add-member-error"></p>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Update Member</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="createGroupModal"
+      tabindex="1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Create Group</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="" enctype="multipart/form-data" method="post">
+            <div class="modal-body">
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter Group Name"
+                required
+                class="w-100 mb-2"
+              />
+              <input type="file" name="group" required class="w-100 mb-2" />
+              <input
+                type="number"
+                min="1"
+                name="limit"
+                placeholder="Enter User Limit"
+                required
+                class="w-100 mb-2"
+              />
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div> 
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script>
+      let sidebarNav = document.querySelector(".sidebar-nav");
+      let sidebarOpenBtn = document.querySelector(".sidebar-open-btn");
+      let sidebarCloseBtn = document.querySelector(".sidebar-close-btn");
+
+      sidebarOpenBtn.addEventListener("click", () => {
+        sidebarNav.classList.add("open");
+      });
+
+      sidebarCloseBtn.addEventListener("click", () => {
+        sidebarNav.classList.remove("open");
+      });
+    </script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="../javascripts/group.js"></script>
+  </body>
+</html>

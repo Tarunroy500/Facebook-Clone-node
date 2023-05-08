@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SOCIAL BOOK</title>
+    <!-- ................CUSTOM CSS LINK................... -->
+    <link rel="stylesheet" href="../stylesheets/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="overlay">
+      <!-- post upload form -->
+      <form
+        action="/uploadpost"
+        class="upload-form"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="main-nav">
+          <h3>Create Post</h3>
+          <img src="../images/img/cross.png" alt="" class="cross" />
+        </div>
+        <div class="upload-nav">
+          <div class="img-cnt">
+            <img src="<%=user.profile_picture%>" />
+          </div>
+          <div class="username"><%=user.first_name%></div>
+        </div>
+        <div class="upload-cnt">
+          <input
+            type="text"
+            name="title"
+            placeholder="What's on your mind ?"
+            id=""
+          />
+          <input type="file" name="file" id="" />
+          <button type="submit">Post</button>
+        </div>
+      </form>
+    </div>
+    <div class="overlay2"></div>
+    <!-- .............START NAV SECTION...................... -->
+    <nav>
+      <div class="container nav-container">
+        <h2 class="logo"><span>Facebook</span></h2>
+        <div class="search-bar">
+          <img src="../images/icon/search.svg" class="icon2" />
+          <input
+            type="search"
+            placeholder="search for Friends..."
+            class="searchinp"
+          />
+          <div class="searchbox"></div>
+        </div>
+        <div class="create">
+          <div class="profile-phots">
+            <img
+              src="<%= user.profile_picture %>"
+              alt=""
+              onclick="toggleMenu()"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="sub-menu-wrap" id="subMenu">
+        <div class="sub-menu">
+          <a href="/profile/<%= user._id %>" class="user-info">
+            <div class="profile-phots">
+              <img src="<%= user.profile_picture %>" alt="" />
+            </div>
+            <h3>&nbsp;<%= user.first_name %></h3>
+          </a>
+          <hr />
+          <a href="/profile/<%=user._id%>" class="sub-menu-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z"
+              ></path>
+            </svg>
+            <p>&nbsp;Edit profile</p>
+            <span>></span>
+          </a>
+          <a href="/settings" class="sub-menu-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM12 3.311L4.5 7.65311V16.3469L12 20.689L19.5 16.3469V7.65311L12 3.311ZM12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12C16 14.2091 14.2091 16 12 16ZM12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14Z"
+              ></path>
+            </svg>
+            <p>&nbsp;Settings & profile</p>
+            <span>></span>
+          </a>
+          <a href="#" class="sub-menu-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 15H13V17H11V15ZM13 13.3551V14H11V12.5C11 11.9477 11.4477 11.5 12 11.5C12.8284 11.5 13.5 10.8284 13.5 10C13.5 9.17157 12.8284 8.5 12 8.5C11.2723 8.5 10.6656 9.01823 10.5288 9.70577L8.56731 9.31346C8.88637 7.70919 10.302 6.5 12 6.5C13.933 6.5 15.5 8.067 15.5 10C15.5 11.5855 14.4457 12.9248 13 13.3551Z"
+              ></path>
+            </svg>
+            <p>&nbsp;Help & Support</p>
+            <span>></span>
+          </a>
+          <a href="/logout" class="sub-menu-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+            >
+              <path
+                d="M4 18H6V20H18V4H6V6H4V3C4 2.44772 4.44772 2 5 2H19C19.5523 2 20 2.44772 20 3V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V18ZM6 11H13V13H6V16L1 12L6 8V11Z"
+              ></path>
+            </svg>
+            <p>&nbsp;Logout</p>
+            <span>></span>
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- ................END NAV SECTION......................... -->
+
+    <!-- ................START MAINE SECTION......................... -->
+    <main>
+      <div class="container main-container">
+        <!--=======MAIN LEFT======== -->
+        <div class="main-left">
+          <a href="/profile/<%= user._id %>" class="profile">
+            <div class="profile-phots">
+              <img src="<%= user.profile_picture %>" alt="" />
+            </div>
+            <div class="hendel">
+              <h4><%= user.first_name %></h4>
+              <p class="text-gry"><%= user.email %></p>
+            </div>
+          </a>
+
+          <!--.............. SIDEBAR.............. -->
+          <div class="side-bar">
+            <a class="menu-item active home-btn">
+              <span
+                ><img src="../images/icon/house-door.svg" class="icon1"
+              /></span>
+              <h3>home</h3>
+            </a>
+
+            <a href="/group-chat" class="menu-item" id="notifice">
+              <span>
+                <!-- <small class="count">9</small> -->
+                <img src="../images/icon/bell.svg" class="icon1"
+              /></span>
+              <h3>Group Message</h3>
+              <!-- ....................notification............................ -->
+              <div class="notification">
+                <div class="NP">
+                  <div class="profile-phots">
+                    <img src="../images/img/p2.jpg" alt="" />
+                  </div>
+                  <div class="notification-body">
+                    <b>melody</b> accepted your firend request
+                    <small class="text-gry"> 1 minutes ago</small>
+                  </div>
+                </div>
+                <div class="NP">
+                  <div class="profile-phots">
+                    <img src="../images/img/p3.png" alt="" />
+                  </div>
+                  <div class="notification-body">
+                    <b>jhon lew</b> commented your post
+                    <small class="text-gry"> 4 minutes ago</small>
+                  </div>
+                </div>
+                <div class="NP">
+                  <div class="profile-phots">
+                    <img src="../images/img/p4.png" alt="" />
+                  </div>
+                  <div class="notification-body">
+                    <b>leah pry</b> liked your post
+                    <small class="text-gry"> 10 minutes ago</small>
+                  </div>
+                </div>
+                <div class="NP">
+                  <div class="profile-phots">
+                    <img src="../images/img/p5.png" alt="" />
+                  </div>
+                  <div class="notification-body">
+                    <b>david</b> liked your post
+                    <small class="text-gry"> 20 minutes ago</small>
+                  </div>
+                </div>
+                <div class="NP">
+                  <div class="profile-phots">
+                    <img src="../images/img/profile-4.jpg" alt="" />
+                  </div>
+                  <div class="notification-body">
+                    <b>angla fox</b> reacted your post
+                    <small class="text-gry"> 1 hour ago</small>
+                  </div>
+                </div>
+                <div class="NP">
+                  <div class="profile-phots">
+                    <img src="../images/img/profile-5.jpeg" alt="" />
+                  </div>
+                  <div class="notification-body">
+                    <b>lana</b> accepted your firend request
+                    <small class="text-gry">2 hour ago</small>
+                  </div>
+                </div>
+                <div class="NP">
+                  <div class="profile-phots">
+                    <img src="../images/img/p7.png" alt="" />
+                  </div>
+                  <div class="notification-body">
+                    <b>mark newton</b> accepted your firend request
+                    <small class="text-gry"> 2 days ago</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a href="/message" class="menu-item" id="message">
+              <span>
+                <!-- <small class="count">3</small> -->
+                <img src="../images/icon/chat-left-dots.svg" class="icon1"
+              /></span>
+              <h3>message</h3>
+            </a>
+            <div class="menu-item bookmark-btn">
+              <span
+                ><img src="../images/icon/bookmarks.svg" class="icon1"
+              /></span>
+              <h3>bookmarks</h3>
+            </div>
+            <a href="/group" class="menu-item">
+              <span
+                ><img src="../images/icon/graph-up-arrow.svg" class="icon1"
+              /></span>
+              <h3>Create Group</h3>
+            </a>
+            <a href="/settings" class="menu-item g">
+              <span><img src="../images/icon/gear.svg" class="icon1" /></span>
+              <h3>setings</h3>
+            </a>
+            <a class="menu-item" id="themeMenu">
+              <span
+                ><img src="../images/icon/palette.svg" class="icon1"
+              /></span>
+              <h3>theme</h3>
+            </a>
+            <label for="creatPost" class="btn btn-primary createpost"
+              >create post</label
+            >
+          </div>
+        </div>
+        <!-- =======MAIN MID======= -->
+        <div class="main-mid">
+          <!-- storys..start.. -->
+          <div class="storys">
+            <div class="story">
+              <div class="profile-phots">
+                <img src="../images/img/profile-1.jpeg" alt="" />
+              </div>
+              <p>your story</p>
+            </div>
+            <div class="story">
+              <div class="profile-phots">
+                <img src="../images/img/s2.jpg" alt="" />
+              </div>
+              <p>jami sia</p>
+            </div>
+            <div class="story">
+              <div class="profile-phots">
+                <img src="../images/img/s3.jpg" alt="" />
+              </div>
+              <p>newton</p>
+            </div>
+            <div class="story">
+              <div class="profile-phots">
+                <img src="../images/img/s4.jpg" alt="" />
+              </div>
+              <p>lana fox</p>
+            </div>
+            <div class="story">
+              <div class="profile-phots">
+                <img src="../images/img/s5.jpg" alt="" />
+              </div>
+              <p>albart joj</p>
+            </div>
+            <div class="story">
+              <div class="profile-phots">
+                <img src="../images/img/s6.jpg" alt="" />
+              </div>
+              <p>devid mark</p>
+            </div>
+          </div>
+          <!-- storys..end.. -->
+          <form action="/uploadpost" class="creatPost" method="post">
+            <div class="profile-phots">
+              <img src="<%= user.profile_picture %>" alt="" />
+            </div>
+            <div class="text-post">
+              <input
+                type="text"
+                placeholder="What's on your mind?"
+                class="creatPost"
+                name="title"
+                required
+              />
+            </div>
+
+            <div>
+              <input type="submit" value="post" class="btn btn-primary" />
+            </div>
+          </form>
+
+          <!--..................feeds..start...............................-->
+          <div class="feeds"></div>
+          <button class="load-more">Load more</button>
+          <!--..................feeds.end................................-->
+        </div>
+        <!-- =======MAIN RIGHT======= -->
+        <div class="main-right">
+          <!--firend request-->
+          <div class="firend-requests">
+            <h4>request</h4>
+            <% user.friend_requests_received.forEach(function(friend){ %>
+            <div class="request">
+              <div class="info">
+                <div class="profile-phots">
+                  <img src="<%= friend.profile_picture %>" alt="" />
+                </div>
+                <div class="request-body">
+                  <h5><%= friend.first_name %> <%= friend.last_name %></h5>
+                  <!-- <p class="text-gry">10 mutual firend</p> -->
+                  <p class="text-gry"><%= friend.email %></p>
+                </div>
+              </div>
+              <div class="action">
+                <a href="/acceptrequest/<%= friend._id %>">
+                  <button class="btn btn-primary" id="add">accept</button>
+                </a>
+                <a href="/deleterequest/<%= friend._id %>">
+                  <button class="btn btn" id="del">delete</button>
+                </a>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!--................. THEME CUSTOMIZE.START............. -->
+    <div class="theme">
+      <div class="card">
+        <h2>CUSTOMIZE yuor site</h2>
+        <p class="text-gry">manage your font, color, and backgroud</p>
+
+        <!--........... FONT-SIZE........... -->
+        <div class="font-siz">
+          <div>
+            <h6>aa</h6>
+            <div class="choose-font-size">
+              <span class="font1"></span>
+              <span class="font2 active"></span>
+              <span class="font3"></span>
+              <span class="font4"></span>
+              <span class="font5"></span>
+            </div>
+            <h3>aa</h3>
+          </div>
+        </div>
+
+        <!--.................. COLOR................ -->
+        <div class="color">
+          <h3>color</h3>
+          <div class="choose-color">
+            <span class="color1"></span>
+            <span class="color2"></span>
+            <span class="color3 active"></span>
+            <span class="color4"></span>
+            <span class="color5"></span>
+          </div>
+        </div>
+
+        <!--.............BACKGROUND.............. -->
+        <div class="background">
+          <h3>backgorund</h3>
+          <div class="chosse-backgorund">
+            <div class="bg1 active">
+              <span></span>
+              <h5 class="bg1">light</h5>
+            </div>
+            <div class="bg2">
+              <span></span>
+              <h5 class="bg2">dark</h5>
+            </div>
+            <div class="bg3">
+              <span></span>
+              <h5 class="bg3">black</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--.............THEME CUSTOMIZE.END...... -->
+    <!-- ................END MAINE SECTION......................... -->
+
+    <!-- .............CUSTOM JS LINK...................... -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+      integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="../javascripts/script.js"></script>
+    <script>
+      let subMenu = document.querySelector("#subMenu");
+
+      function toggleMenu() {
+        subMenu.classList.toggle("open-menu");
+      }
+    </script>
+  </body>
+</html>

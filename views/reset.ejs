@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../stylesheets/reset.css">
+</head>
+<body>
+    <div class="reset-password">
+        <h2>Choose a New Password</h2>
+        <form action="/reset/<%= phone %>" method="post">
+          <div class="form-group">
+            <label for="new-password">Create a new password that is at least 6 characters long:</label>
+            <input type="password" id="new-password" name="newpassword"  required>
+          </div>
+          <div class="button-group">
+            <button type="submit" class="btn-continue">Continue</button>
+            <button type="button" class="btn-cancel">Cancel</button>
+          </div>
+        </form>
+      </div>
+      
+</body>
+</html>

@@ -1,0 +1,242 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background-color: #f1f1f1;
+    font-family: Arial, sans-serif;
+  }
+  .upper-container{
+    width: 100%;
+    height: 100%;
+    margin: 20px;
+    /* background: red; */
+    display: flex;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin-left: 20px;
+  }
+  
+  .chat-box {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;
+    height: 75vmin;
+    /* width: 40vmax; */
+    
+  }
+  
+  .chat-message {
+    padding: 10px;
+    display: flex;
+    align-items: flex-end;
+  }
+  
+  .chat-message.left p {
+    background-color: #e1ffc7;
+    color: #333;
+    border-radius: 10px 10px 0 10px;
+    margin-right: auto;
+    margin-left: 50px;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 1.3;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  
+  .chat-message.right p {
+    background-color: #f1f0f0;
+    color: #333;
+    border-radius: 10px 10px 10px 0;
+    margin-left: 50px;
+    padding: 15px;
+    font-size: 14px;
+    line-height: 1.3;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .chat-message p::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-right: 10px solid;
+    border-bottom: 10px solid transparent;
+  }
+  
+  .chat-message.left p::before {
+    left: -10px;
+    top: 0;
+    border-right: none;
+    border-left: 10px solid #e1ffc7;
+  }
+  
+  .chat-message.right p::before {
+    right: -10px;
+    bottom: 0;
+    border-left: none;
+    border-right: 10px solid #f1f0f0;
+  }
+  
+  .chat-message .timestamp {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #999;
+  }
+  
+  .chat-input {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    margin-right: 10px;
+  }
+  
+  .chat-input button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .chat-input button:hover {
+    transform: scale(1.1);
+  }
+  
+  .chat-input button i {
+    font-size: 18px;
+  }
+
+  
+  .friends-list {
+    width: 200px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .friend {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .friend img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .friend-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .friend-info h4 {
+    margin: 0;
+    font-size: 16px;
+    color: #444;
+  }
+  
+  .status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .status.online {
+    background-color: #8bc34a;
+  }
+  
+  .status.offline {
+    background-color: #f44336;
+  }
+  
+  .friends-list:before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    transform: rotate(45deg);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    position: absolute;
+    top: -10px;
+    left: 30px;
+  }
+  
+  .friends-list:after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .friends-list h3 {
+    font-size: 20px;
+    color: #444;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  
+.user-info {
+	display: flex;
+	align-items: center;
+	margin: 20px 0;
+}
+
+.user-info img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+.user-info h4 {
+	font-size: 18px;
+	font-weight: 500;
+	color: #333;
+}
+ header {
+    background-color: #fff;
+    height: 80px;
+   width:1000px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
